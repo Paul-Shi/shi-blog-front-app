@@ -1,12 +1,10 @@
 import axios from 'axios'
-//字符串处理
-import qs from 'qs'
-//合并对象工具
-import merge from 'lodash/merge'
+import qs from 'qs' // 字符串处理
+import merge from 'lodash/merge' // 合并对象工具
 
 const http = axios.created({
   timeout: 1000 * 30,
-  //当前请求为跨域类型时是否在请求中携带cookie
+  // 当前请求为跨域类型时是否在请求中携带cookie
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json;charset=utf-8'
@@ -17,8 +15,8 @@ const http = axios.created({
  * 请求地址处理
  */
 http.adornUrl = (actionName) => {
-  //非生产环境 && 开启代理，接口前缀统一使用[/proxyApi/]前缀做代理拦截
-  return (process.env.NODE_ENV != 'production' && process.env.OPEN_PROXY ? '/proxyApi/' : window.SITE_CONFIG.baseUrl) + actionName
+  // 非生产环境 && 开启代理，接口前缀统一使用[/proxyApi/]前缀做代理拦截
+  return (process.env.NODE_ENV !== 'production' && process.env.OPEN_PROXY ? '/proxyApi/' : window.SITE_CONFIG.baseUrl) + actionName
 }
 
 /**
