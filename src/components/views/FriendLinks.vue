@@ -34,15 +34,13 @@
     methods: {
       listLink() {
         this.$http({
-          this.$http({
-            url: this.$http.addornUrl('/operation/links'),
-            method: 'get',
-            params: this.$http.adornParams()
-          }).then(({data}) => {
-            if (data && data.code === 200) {
-              this.linkList = data.linkList
-            }
-          })
+          url: this.$http.addornUrl('/operation/links'),
+          method: 'get',
+          params: this.$http.adornParams()
+        }).then(({data}) => {
+          if (data && data.code === 200) {
+            this.linkList = data.linkList
+          }
         })
       }
     }
