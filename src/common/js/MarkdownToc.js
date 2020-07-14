@@ -96,8 +96,6 @@ Toc.prototype._showToc = function () {
     //有传入目标id，直接在目标id内生成div
     document.getElementById(this.options.targetId).appendChild(this.toc)
   }
-
-  export default Toc
-
-
 }
+
+export default Toc
