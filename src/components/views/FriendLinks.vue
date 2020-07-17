@@ -32,9 +32,9 @@
       'panel': Panel
     },
     methods: {
-      listLink() {
+      listLink () {
         this.$http({
-          url: this.$http.addornUrl('/operation/links'),
+          url: this.$http.adornUrl('/operation/links'),
           method: 'get',
           params: this.$http.adornParams()
         }).then(({data}) => {
