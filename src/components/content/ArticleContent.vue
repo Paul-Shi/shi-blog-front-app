@@ -31,7 +31,7 @@
   import About from '@/components/views/about'
   import FriendLinks from '@/components/views/FriendLinks'
   import SideToc from '@/components/views/SideToc'
-  import Recommond from '@/components/views/Recommond'
+  import Recommend from '@/components/views/Recommend'
   import TOC from '@/common/js/MarkdownToc'
   import TocScrollSpy from '@/common/js/TocScrollSpy'
 

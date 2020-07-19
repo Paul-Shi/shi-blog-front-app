@@ -1,32 +1,31 @@
 <template>
-  <div class="recommend">
-    <panel :title="'推荐阅读'">
+  <div class="hotRead">
+    <panel :title="'热门文章'">
       <div slot="content" class="content">
-        <div class="top" v-if="topRecommend">
-          <a :href="'/' + topRecommend.urlType + '/' + topRecommend.linkId">
-            <p class="title">{{topRecommend.totle}}</p>
+        <div class="top">
+          <a :href="'/' + topHotRead.urlType + '/' + topHotRead.linkId">
+            <p class="title">{{topHotRead.title}}</p>
             <div class="tags">
-              <iv-tag :color="tag.id | mapTagColor" v-for="(tag) in topRecommend.tagList" :key="tag.id">{{tag.name}}
-              </iv-tag>
+              <iv-tag :color="tag.id | mapTagColor" v-for="(tag) in topHotRead.tagList" :key="tag.id">{{tag.name}}</iv-tag>
             </div>
             <p class="info">
-              <span class="time">{{topRecommend.createTime | socialDate}}</span>
-              <span class="like"><a><iv-icon type="heart"></iv-icon>{{topRecommend.likeNum}}</a></span>
-              <span class="comments"><a><iv-icon type="compose"></iv-icon>{{topRecommend.commentNum}}</a></span>
-              <span class="readings"><a><iv-icon type="eye"></iv-icon>{{topRecommend.readNum}}</a></span>
+              <span class="time">{{topHotRead.createTime | socialDate}}</span>
+              <span class="likes"><a><iv-icon type="heart"></iv-icon>{{topHotRead.likeNum}}</a></span>
+              <span class="comments"><a><iv-icon type="compose"></iv-icon>{{topHotRead.commentNum}}</a></span>
+              <span class="readings"><a><iv-icon type="eye"></iv-icon>{{topHotRead.readNum}}</a></span>
             </p>
-            <p class="desc">{{topRecommend.description}}</p>
+            <p class="desc">{{topHotRead.description | textLineBreak(60)}}</p>
           </a>
         </div>
         <ul class="others">
-          <li v-for="recommend in recommendList" :key="recommend.id">
-            <a :href="'/' + recommend.urlType + '/' + recommend.linkId">
-              <p class="title">{{recommend.title}}</p>
+          <li v-for="hotRead in hotReadList" :key="hotRead.id">
+            <a :href="'/' + hotRead.urlType + '/' + hotRead.linkId">
+              <p class="title">{{hotRead.title}}</p>
               <p class="info">
-                <span class="time">{{recommend.createTime | socialDate}}</span>
-                <span class="likes"><a><iv-icon type="heart"></iv-icon>{{recommend.likeNum}}</a></span>
-                <span class="comments"><a><iv-icon type="compose"></iv-icon>{{recommend.commentNum}}</a></span>
-                <span class="readings"><a><iv-icon type="eye"></iv-icon>{{recommend.readNum}}</a></span>
+                <span class="time">{{hotRead.createTime | socialDate}}</span>
+                <span class="likes"><a><iv-icon type="heart"></iv-icon>{{hotRead.likeNum}}</a></span>
+                <span class="comments"><a><iv-icon type="compose"></iv-icon>{{hotRead.commentNum}}</a></span>
+                <span class="readings"><a><iv-icon type="eye"></iv-icon>{{hotRead.readNum}}</a></span>
               </p>
             </a>
           </li>
@@ -43,24 +42,24 @@
   export default {
     data () {
       return {
-        recommendList: [],
-        topRecommend: {}
+        hotReadList: [],
+        topHotRead: {}
       }
     },
     mixins: [mixin],
-    created () {
-      this.listRecommend()
+    created() {
+      this.listHotRead()
     },
     methods: {
-      listRecommend () {
+      listHotRead () {
         this.$http({
-          url: this.$http.adornUrl('/operation/recommends'),
+          url: this.$http.adornUrl('/operation/hotReads'),
           method: 'get',
           params: this.$http.adornParams()
         }).then(({data}) => {
           if (data && data.code === 200) {
-            this.recommendList = data.recommendList
-            this.topRecommend = this.recommendList.shift()
+            this.hotReadList = data.hotReadList
+            this.topHotRead = this.hotReadList.shift()
           }
         })
       }
@@ -71,10 +70,11 @@
   }
 </script>
 
+
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/index.styl";
 
-  .recommend
+  .hotRead
     .content
       padding 5px 20px
     .top, .others

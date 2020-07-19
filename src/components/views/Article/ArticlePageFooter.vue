@@ -7,7 +7,7 @@
 
 <script type="text/ecmascript-6">
   import LicenseTag from '@/components/views/LicenseTag'
-  import SocialSection from '@/components/views/Commenet/SocialSection'
+  import SocialSection from '@/components/views/Comment/SocialSection'
 
   export default {
     components: {

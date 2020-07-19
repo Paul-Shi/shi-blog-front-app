@@ -1,5 +1,5 @@
 //文字省略模式
-export const LineBreakCode = {
+export const LineBreakMode = {
   WrappingTruncatingTail: 1, // 显示头部文字内容，其他直接截断。
   WrappingTruncatingHead: 2, // 显示尾部文字内容，其他直接截断。
   EllipsisTruncatingTail: 3, // 结尾部分的内容以……方式省略，显示头的文字内容。
