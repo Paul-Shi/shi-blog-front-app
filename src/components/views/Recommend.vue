@@ -37,38 +37,38 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {mixin} from '@/utils/index'
-  import Panel from '@/components/utils/Panel'
+import {mixin} from '@/utils/index'
+import Panel from '@/components/utils/Panel'
 
-  export default {
-    data () {
-      return {
-        recommendList: [],
-        topRecommend: {}
-      }
-    },
-    mixins: [mixin],
-    created () {
-      this.listRecommend()
-    },
-    methods: {
-      listRecommend () {
-        this.$http({
-          url: this.$http.adornUrl('/operation/recommends'),
-          method: 'get',
-          params: this.$http.adornParams()
-        }).then(({data}) => {
-          if (data && data.code === 200) {
-            this.recommendList = data.recommendList
-            this.topRecommend = this.recommendList.shift()
-          }
-        })
-      }
-    },
-    components: {
-      'panel': Panel
+export default {
+  data () {
+    return {
+      recommendList: [],
+      topRecommend: {}
     }
+  },
+  mixins: [mixin],
+  created () {
+    this.listRecommend()
+  },
+  methods: {
+    listRecommend () {
+      this.$http({
+        url: this.$http.adornUrl('/operation/recommends'),
+        method: 'get',
+        params: this.$http.adornParams()
+      }).then(({data}) => {
+        if (data && data.code === 200) {
+          this.recommendList = data.recommendList
+          this.topRecommend = this.recommendList.shift()
+        }
+      })
+    }
+  },
+  components: {
+    'panel': Panel
   }
+}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

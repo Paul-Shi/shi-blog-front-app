@@ -17,52 +17,52 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {mixin} from '@/utils'
-  import ArticlePageContent from '@/components/views/Article/ArticlePageContent'
-  import ArticlePageFooter from '@/components/views/Article/ArticlePageFooter'
-  import ArticleListCell from '@/components/views/Article/ArticleListCell'
-  import Recommend from '@/components/views/Recommend'
-  import TagWall from '@/components/views/TagWall'
-  import SectionTitle from '@/components/views/SectionTitle/SectionTitle'
+import {mixin} from '@/utils'
+import ArticlePageContent from '@/components/views/Article/ArticlePageContent'
+import ArticlePageFooter from '@/components/views/Article/ArticlePageFooter'
+import ArticleListCell from '@/components/views/Article/ArticleListCell'
+import Recommend from '@/components/views/Recommend'
+import TagWall from '@/components/views/TagWall'
+import SectionTitle from '@/components/views/SectionTitle/SectionTitle'
 
-  export default {
-    data () {
-      return {
-        articleList: [],
-        noResult: false
-      }
-    },
-    mixins: [mixin],
-    created() {
-      this.listSearchArticle()
-    },
-    methods: {
-      listSearchArticle() {
-        this.$http({
-          url: this.$http.adornUrl('articles/search'),
-          type: 'get',
-          params: this.$http.adornParams({keywords: this.$route.keywords})
-        }).then(({data}) => {
-          if (data && data.code === 200) {
-            this.articleList = data.articleList
-            if (this.articleList.length > 0) {
-              this.articleList.map(article => {
-                article.coverType = 2
-              })
-            } else { this.noResult = true }
-          }
-        })
-      }
-    },
-    components: {
-      'article-page-content': ArticlePageContent,
-      'article-page-footer': ArticlePageFooter,
-      'article-list-cell': ArticleListCell,
-      'recommend': Recommend,
-      'tag-wall': TagWall,
-      'section-title': SectionTitle
+export default {
+  data () {
+    return {
+      articleList: [],
+      noResult: false
     }
+  },
+  mixins: [mixin],
+  created () {
+    this.listSearchArticle()
+  },
+  methods: {
+    listSearchArticle () {
+      this.$http({
+        url: this.$http.adornUrl('articles/search'),
+        type: 'get',
+        params: this.$http.adornParams({keywords: this.$route.keywords})
+      }).then(({data}) => {
+        if (data && data.code === 200) {
+          this.articleList = data.articleList
+          if (this.articleList.length > 0) {
+            this.articleList.map(article => {
+              article.coverType = 2
+            })
+          } else { this.noResult = true }
+        }
+      })
+    }
+  },
+  components: {
+    'article-page-content': ArticlePageContent,
+    'article-page-footer': ArticlePageFooter,
+    'article-list-cell': ArticleListCell,
+    'recommend': Recommend,
+    'tag-wall': TagWall,
+    'section-title': SectionTitle
   }
+}
 </script>
 
 <style lang="stylus" type="text/stylus" rel="stylesheet/stylus">

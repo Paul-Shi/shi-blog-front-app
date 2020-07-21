@@ -27,7 +27,7 @@ Toc.prototype._collectTitleElements = function () {
 
   this._elTitlesNames.length = this._elTitlesNames.length > this.tocLevel ? this.tocLevel : this._elTitlesNames.length
 
-  for (var j=0; j <this.elChilds.length; j++) {
+  for (var j = 0; j < this.elChilds.length; j++) {
     this._elChildName = this.elChilds[j].tagName.toLowerCase()
     if (this._elTitlesNames.toString().match(this._elChildName)) {
       this.elTitleElements.push(this.elChilds[j])
@@ -42,7 +42,7 @@ Toc.prototype._createTocContent = function () {
   this._tempLists = []
 
   // 某些情况下base标签和页面地址不一致，会造成锚点错乱
-  for (var i= 0; i < this._elTitleElementsLen; i++) {
+  for (var i = 0; i < this._elTitleElementsLen; i++) {
     var j = i + 1
     this._elTitleElementsLen = this.elTitleElements[i]
     this._elTitleElementName = this._elTitleElement.tagName
@@ -56,7 +56,7 @@ Toc.prototype._createTocContent = function () {
       if (this._elTitleElementName !== this._elNextTitleElementName) {
         var checkColse = false
         var y = 1
-        for (var t = this._tempLists.length -1; t >= 0; t--) {
+        for (var t = this._tempLists.length - 1; t >= 0; t--) {
           if (this._tempLists[t].tagName === this._elNextTitleElementName) {
             checkColse = true
             break
@@ -66,7 +66,7 @@ Toc.prototype._createTocContent = function () {
 
         if (checkColse) {
           this.tocContent += new Array(y + 1).join('</li></ul>')
-          this._tempLists.length = this._tempLists.length - y  // 更新栈的长度
+          this._tempLists.length = this._tempLists.length - y // 更新栈的长度
         } else {
           this._tempLists.push(this._elTitleElement)
           this.tocContent += '<ul>'
@@ -76,7 +76,7 @@ Toc.prototype._createTocContent = function () {
       }
     } else {
       if (this._tempLists.length) {
-        this.tocContent + new Array(this._tempLists.length + 1).join('</li></ul>')
+        this.tocContent = new Array(this._tempLists.length + 1).join('</li></ul>')
       } else {
         this.tocContent += '</li>'
       }
@@ -90,10 +90,10 @@ Toc.prototype._showToc = function () {
   this.toc.innerHTML = this.tocContent
   this.toc.setAttribute('class', this.tocClass)
   if (!this.options.targetId) {
-    //没有传入目标id， 追加到生成目录的div内
+    // 没有传入目标id， 追加到生成目录的div内
     this.el.appendChild(this.toc)
   } else {
-    //有传入目标id，直接在目标id内生成div
+    // 有传入目标id，直接在目标id内生成div
     document.getElementById(this.options.targetId).appendChild(this.toc)
   }
 }

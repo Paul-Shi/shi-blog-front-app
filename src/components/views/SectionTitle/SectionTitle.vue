@@ -14,14 +14,14 @@
 </template>
 
 <script type="text/ecmascript-6">
-  export default {
-    props: {
-      mainTitle: '',
-      subtitle: '',
-      tipText: '',
-      tipHref: ''
-    }
+export default {
+  props: {
+    mainTitle: '',
+    subtitle: '',
+    tipText: '',
+    tipHref: ''
   }
+}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
@@ -80,4 +80,3 @@
         display none
 
 </style>
-

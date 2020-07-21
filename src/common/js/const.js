@@ -1,4 +1,4 @@
-//文字省略模式
+// 文字省略模式
 export const LineBreakMode = {
   WrappingTruncatingTail: 1, // 显示头部文字内容，其他直接截断。
   WrappingTruncatingHead: 2, // 显示尾部文字内容，其他直接截断。
@@ -7,17 +7,17 @@ export const LineBreakMode = {
   EllipsisTruncatingHead: 5 // 前面部分文字以……方式省略，显示尾部文字内容。
 }
 
-//响应式断点
+// 响应式断点
 export const ResponsivePoint = {
   Sm: 768,
   Md: 992,
   Lg: 1200
 }
 
-//默认请求数据时的limit size
+// 默认请求数据时的limit size
 export const DefaultLimitSize = 10
 
-//section title 默认的menus
+// section title 默认的menus
 export const DefaultFilterList = [
   {
     name: '最新',

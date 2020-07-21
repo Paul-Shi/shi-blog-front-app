@@ -42,85 +42,84 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import SideBar from '@/components/header/SimpleHeader/SideBar'
-  import {treeDataTranslate} from "@/utils";
+import SideBar from '@/components/header/SimpleHeader/SideBar'
+import {treeDataTranslate} from '@/utils'
 
-  export default {
-    components: {
-      'sidebar': SideBar
-    },
-    data() {
-      return {
-        show: true,
-        articleCategoryList: [],
-        bookCategoryList: [],
-        keywords: ''
-      }
-    },
-    created() {
-      this.listCategory()
-      this.keywords = this.$route.query.keywords
-    },
-    mounted: function () {
-      this.$nextTick(function () {
-        this.initMobileMenu()
+export default {
+  components: {
+    'sidebar': SideBar
+  },
+  data () {
+    return {
+      show: true,
+      articleCategoryList: [],
+      bookCategoryList: [],
+      keywords: ''
+    }
+  },
+  created () {
+    this.listCategory()
+    this.keywords = this.$route.query.keywords
+  },
+  mounted: function () {
+    this.$nextTick(function () {
+      this.initMobileMenu()
+    })
+    // 给页面绑定滑轮滚动事件
+    if (document.addEventListener) { // firefox
+      document.addEventListener('DOMMouseScroll', this.watchScroll, false)
+    }
+    // 滚动滑轮触发ScrollFunc方法  // ie google
+    window.onmousewheel = document.onmousewheel = this.watchScroll
+  },
+  methods: {
+    initMobileMenu () {
+      // 显示手机端的菜单
+      var sidebar = this.$refs.sidebar
+      this.$refs.menubutton.addEventListener('click', function () {
+        sidebar.toggleSideBar()
       })
-      // 给页面绑定滑轮滚动事件
-      if (document.addEventListener) { // firefox
-        document.addEventListener('DOMMouseScroll', this.watchScroll, false)
-      }
-      // 滚动滑轮触发ScrollFunc方法  // ie google
-      window.onmousewheel = document.onmousewheel = this.watchScroll
     },
-    methods: {
-      initMobileMenu() {
-        // 显示手机端的菜单
-        var sidebar = this.$refs.sidebar
-        this.$refs.menubutton.addEventListener('click', function () {
-          sidebar.toggleSideBar()
-        })
-      },
-      watchScroll(e) {
-        e = e || window.event
-        if (e.whereDelta) {
-          if (e.whereDelta > 0 && this.show === false) {   // 当滑轮向上滚动
-            this.show = true
-          }
-          if (e.whereDelta < 0 && this.show === true) {    //当滑轮向上滚动
-            this.show = false
-          }
-        } else if (e.detail) {
-          if (e.detail < 0 && this.show === false) {    //当滑轮向上滚动
-            this.show = true
-          }
-          if (e.detail > 0 && this.show === true) {     // 当滑轮向下滚动
-            this.show = false
-          }
+    watchScroll (e) {
+      e = e || window.event
+      if (e.whereDelta) {
+        if (e.whereDelta > 0 && this.show === false) { // 当滑轮向上滚动
+          this.show = true
         }
-      },
-      listCategory() {
-        this.$http({
-          url: this.$http.adornUrl('/operation/categories'),
-          method: 'get',
-          params: this.$http.adornParams()
-        }).then(({data}) => {
-          if (data && data.code === 200) {
-            data.categoryList.forEach(category => {
-              if (category.type === 0) {
-                this.articleCategoryList.push(category)
-              } else if (category.type === 1) {
-                this.bookCategoryList.push(category)
-              }
-            })
-            this.articleCategoryList = treeDataTranslate(this.articleCategoryList)
-            this.bookCategoryList = treeDataTranslate(this.bookCategoryList)
-          }
-        })
+        if (e.whereDelta < 0 && this.show === true) { // 当滑轮向上滚动
+          this.show = false
+        }
+      } else if (e.detail) {
+        if (e.detail < 0 && this.show === false) { // 当滑轮向上滚动
+          this.show = true
+        }
+        if (e.detail > 0 && this.show === true) { // 当滑轮向下滚动
+          this.show = false
+        }
       }
+    },
+    listCategory () {
+      this.$http({
+        url: this.$http.adornUrl('/operation/categories'),
+        method: 'get',
+        params: this.$http.adornParams()
+      }).then(({data}) => {
+        if (data && data.code === 200) {
+          data.categoryList.forEach(category => {
+            if (category.type === 0) {
+              this.articleCategoryList.push(category)
+            } else if (category.type === 1) {
+              this.bookCategoryList.push(category)
+            }
+          })
+          this.articleCategoryList = treeDataTranslate(this.articleCategoryList)
+          this.bookCategoryList = treeDataTranslate(this.bookCategoryList)
+        }
+      })
     }
   }
+}
 </script>
-
 
 <style lang="stylus" rel="stylesheet/stylus">
   @import "stylus/header.styl";

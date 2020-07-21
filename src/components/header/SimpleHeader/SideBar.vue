@@ -81,48 +81,48 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {mixin} from "@/utils"
+import {mixin} from '@/utils'
 
-  export default {
-    name: 'side-bar',
-    data() {
-      return {
-        show: false,
-        showNav: false
-      }
+export default {
+  name: 'side-bar',
+  data () {
+    return {
+      show: false,
+      showNav: false
+    }
+  },
+  props: {
+    articleCategoryList: Array,
+    bookCategoryList: Array
+  },
+  mixins: [mixin],
+  beforeUpdate (to, from, next) {
+    next()
+  },
+  methods: {
+    rootRouterLink (category) {
+      let router = {}
+      router.name = category.category_type
+      return router
     },
-    props: {
-      articleCategoryList: Array,
-      bookCategoryList: Array
+    routerLink (category) {
+      let router = {}
+      router.name = category.category_type
+      router.params = {}
+      router.params['id'] = category.id
+      return router
     },
-    mixins: [mixin],
-    beforeUpdate(to, from, next) {
-      next()
-    },
-    methods: {
-      rootRouterLink(category) {
-        let roouter = {}
-        router.name = category.category_type
-        return roouter
-      },
-      routerLink(category) {
-        let router = {}
-        router.name = category.category_type
-        router.params = {}
-        router.params['id'] = category.id
-        return router
-      },
-      toggleSideBar() {
-        this.show = !this.show
-        this.showNav = !(this.$router.name === 'article' ||
+    toggleSideBar () {
+      this.show = !this.show
+      this.showNav = !(this.$router.name === 'article' ||
           this.$router.name === 'book' ||
           this.$router.name === 'book.note' ||
           this.$router.name === 'movie' ||
           this.$router.name === 'album'
-        )
-      }
+      )
     }
   }
+}
 </script>
 
 <style lang="stylus" type="text/stylus" rel="stylesheet/stylus">

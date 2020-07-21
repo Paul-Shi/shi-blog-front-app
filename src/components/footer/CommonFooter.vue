@@ -11,17 +11,17 @@
 </template>
 
 <script type="text/ecmascript-6">
-  export default {
-    data() {
-      return {
-        siteInfo: {
-          icp: '备案号',
-          copyright: '版权所有',
-          copyright_desc: '以商业目的使用本网站内容需获许可，非商业目的使用授权遵循CC BY-NC 4.0'
-        }
+export default {
+  data () {
+    return {
+      siteInfo: {
+        icp: '备案号',
+        copyright: '版权所有',
+        copyright_desc: '以商业目的使用本网站内容需获许可，非商业目的使用授权遵循CC BY-NC 4.0'
       }
     }
   }
+}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

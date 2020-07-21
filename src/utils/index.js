@@ -4,28 +4,28 @@ import {LineBreakMode} from '@/common/js/const'
  * DateStr 时间戳转字符串格式
  * @param date
  */
-export function socialDateFormat(date) {
-  //获取js时间戳
+export function socialDateFormat (date) {
+  // 获取js时间戳
   var time = new Date().getTime()
-  //去掉js时间戳后三位
+  // 去掉js时间戳后三位
   time = parseInt((time - date) / 1000)
-  //存储转换值
+  // 存储转换值
   var s
-  //十分钟内
+  // 十分钟内
   if (time < 60 * 10) {
     return '刚刚'
   } else if ((time < 60 * 60) && (time > 60 * 10)) {
-    //超过十分钟少于一小时
+    // 超过十分钟少于一小时
     s = Math.floor(time / 60)
     return s + '分钟前'
   } else if ((time < 60 * 60 * 24) && (time >= 60 * 60)) {
-    //超过一小时少于二十四小时
+    // 超过一小时少于二十四小时
     s = Math.floor(time / 60 / 60 / 24)
     return s + '天前'
   } else {
-    //超过三天
+    // 超过三天
     date = new Date(parseInt(date))
-    return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
   }
 }
 
@@ -33,7 +33,7 @@ export function socialDateFormat(date) {
  * 映射tag颜色
  * @param index
  */
-export function mapTagColor(index) {
+export function mapTagColor (index) {
   switch (index % 4) {
     case 0:
       return 'blue'
@@ -49,7 +49,7 @@ export function mapTagColor(index) {
 /**
  * 树形数据转换
  */
-export function treeDataTranslate(data, id = 'id', pid = 'parentId') {
+export function treeDataTranslate (data, id = 'id', pid = 'parentId') {
   var res = []
   var temp = {}
   for (var i = 0; i < data.length; i++) {
@@ -74,18 +74,18 @@ export function treeDataTranslate(data, id = 'id', pid = 'parentId') {
 
 export const mixin = {
   filters: {
-    //用于映射的标签颜色
+    // 用于映射的标签颜色
     mapTagColor: function (index) {
       return mapTagColor(index)
     },
     socialDate: function (formatedDate) {
       return socialDateFormat(formatedDate)
     },
-    //去除html标签
+    // 去除html标签
     filterHtml: function (richText) {
       return richText.replace(/<.+?>/g, '')
     },
-    //用于处理行尾省略号的过滤器
+    // 用于处理行尾省略号的过滤器
     textLineBreak: function (text, maxLength, lineBreakMode) {
       if (text === undefined || text === null || text.length === 0) {
         return ''

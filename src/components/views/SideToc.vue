@@ -6,43 +6,43 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Panel from '@/components/utils/Panel'
-  export default {
-    methods: {
-      recalcActive() {
-        // 先计算list相对于页面的顶部距离
-        var listScrollTop = this.$refs.list.getBoundingClientRect().top + document.documentElement.scrollTop
-        // 在计算active相对于页面的顶部距离
-        var activeAnode = this.$refs.list.querySelector('.active')
-        if(activeAnode === null) {
-          return
-        }
-        var aactiveANodeScrollTop = activeAnode.getBoundingClientRect().top + document.documentElement.scrollTop
-        var activeIndicator = this.$refs.list.querySelector('.avtive-indicator')
-        activeIndicator.style.top = aactiveANodeScrollTop - listScrollTop + 'px'
-        activeIndicator.style.height = activeAnode.clientHeight + 'px'
-      },
-      beActive (event) {
-        var activeAnode = this.$refs.list.querySelector('.active')
-        if(activeAnode !== null) {
-          activeAnode.classList.remove('active')
-        }
-        event.target.classList.add('active')
-        this.$nextTick(() => {
-          this.recalcActive()
-        })
+import Panel from '@/components/utils/Panel'
+export default {
+  methods: {
+    recalcActive () {
+      // 先计算list相对于页面的顶部距离
+      var listScrollTop = this.$refs.list.getBoundingClientRect().top + document.documentElement.scrollTop
+      // 在计算active相对于页面的顶部距离
+      var activeAnode = this.$refs.list.querySelector('.active')
+      if (activeAnode === null) {
+        return
       }
+      var aactiveANodeScrollTop = activeAnode.getBoundingClientRect().top + document.documentElement.scrollTop
+      var activeIndicator = this.$refs.list.querySelector('.avtive-indicator')
+      activeIndicator.style.top = aactiveANodeScrollTop - listScrollTop + 'px'
+      activeIndicator.style.height = activeAnode.clientHeight + 'px'
     },
-    mounted: function () {
-      this.recalcActive()
-    },
-    updated: function () {
-      this.recalcActive()
-    },
-    components: {
-      'panel': Panel
+    beActive (event) {
+      var activeAnode = this.$refs.list.querySelector('.active')
+      if (activeAnode !== null) {
+        activeAnode.classList.remove('active')
+      }
+      event.target.classList.add('active')
+      this.$nextTick(() => {
+        this.recalcActive()
+      })
     }
+  },
+  mounted: function () {
+    this.recalcActive()
+  },
+  updated: function () {
+    this.recalcActive()
+  },
+  components: {
+    'panel': Panel
   }
+}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

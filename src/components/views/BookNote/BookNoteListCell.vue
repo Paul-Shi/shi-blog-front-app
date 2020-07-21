@@ -73,79 +73,78 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {mixin} from '@/utils'
+import {mixin} from '@/utils'
 
-  const ARTICLE_TYPE_BIG_IMAGE = 1
-  const ARTICLE_TYPE_NO_IMAGE = 2
+const ARTICLE_TYPE_BIG_IMAGE = 1
+const ARTICLE_TYPE_NO_IMAGE = 2
 
-  export default {
-    props: {
-      bookNote: {
-        Type: Object
-      },
-      type: ''
+export default {
+  props: {
+    bookNote: {
+      Type: Object
     },
-    data() {
-      return {
-        showBookInfo: false
+    type: ''
+  },
+  data () {
+    return {
+      showBookInfo: false
+    }
+  },
+  mixins: [mixin],
+  computed: {
+    textOrderType: function () {
+      return this.book.coverType === ARTICLE_TYPE_BIG_IMAGE ? 2 : 1
+    },
+    imgOrderType: function () {
+      return this.bookNote.coverType === ARTICLE_TYPE_BIG_IMAGE ? 1 : 2
+    },
+    textSpan: function () {
+      if (this.bookNote.coverType === ARTICLE_TYPE_BIG_IMAGE) {
+        return 24
+      } else if (this.bookNote.coverType === ARTICLE_TYPE_NO_IMAGE) {
+        return 24
+      } else {
+        return 17
       }
     },
-    mixins: [mixin],
-    computed: {
-      textOrderType: function () {
-        return this.book.coverType === ARTICLE_TYPE_BIG_IMAGE ? 2 : 1
-      },
-      imgOrderType: function () {
-        return this.bookNote.coverType === ARTICLE_TYPE_BIG_IMAGE ? 1 : 2
-      },
-      textSpan: function () {
-        if (this.bookNote.coverType === ARTICLE_TYPE_BIG_IMAGE) {
-          return 24
-        } else if (this.bookNote.coverType === ARTICLE_TYPE_NO_IMAGE) {
-          return 24
-        } else {
-          return 17
-        }
-      },
-      imgSpan: function () {
-        if (this.bookNote.coverType === ARTICLE_TYPE_BIG_IMAGE) {
-          return 24
-        } else if (this.bookNote.coverType === ARTICLE_TYPE_NO_IMAGE) {
-          return 0
-        } else {
-          return 7
-        }
-      },
-      themeClass: function () {
-        if (this.bookNote.coverType === ARTICLE_TYPE_BIG_IMAGE) {
-          return 'big-image'
-        } else {
-          return ''
-        }
+    imgSpan: function () {
+      if (this.bookNote.coverType === ARTICLE_TYPE_BIG_IMAGE) {
+        return 24
+      } else if (this.bookNote.coverType === ARTICLE_TYPE_NO_IMAGE) {
+        return 0
+      } else {
+        return 7
       }
     },
-    methods: {
-      toggleBookInfo() {
-        this.showBookInfo = !this.showBookInfo
-      },
-      likePost(post) {
-        this.$http({
-          url: this.$http.adornUrl('/bookNote/like' + post.id),
-          method: 'put',
-          data: this.$http.adornData()
-        }).then(({data}) => {
-          if (data && data.code === 200) {
-            post.likeNum += 1
-            this.$Message.success('点赞成功')
-          }
-        }).catch((error) => {
-          console.log(error)
-        })
+    themeClass: function () {
+      if (this.bookNote.coverType === ARTICLE_TYPE_BIG_IMAGE) {
+        return 'big-image'
+      } else {
+        return ''
       }
     }
+  },
+  methods: {
+    toggleBookInfo () {
+      this.showBookInfo = !this.showBookInfo
+    },
+    likePost (post) {
+      this.$http({
+        url: this.$http.adornUrl('/bookNote/like' + post.id),
+        method: 'put',
+        data: this.$http.adornData()
+      }).then(({data}) => {
+        if (data && data.code === 200) {
+          post.likeNum += 1
+          this.$Message.success('点赞成功')
+        }
+      }).catch((error) => {
+        console.log(error)
+      })
+    }
   }
+}
 </script>
-
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../../common/stylus/index.styl";
@@ -352,4 +351,3 @@
             text-align justify
             margin 10px 0 5px
 </style>
-

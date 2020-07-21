@@ -6,11 +6,11 @@ var TocScrollSpy = function (articleId, tocId, options) {
 
   this.options = options || {}
 
-  //监听级别
+  // 监听级别
   this.spayLevel = parseInt(options.level) || 5
-  //文章scroll时顶部margin
+  // 文章scroll时顶部margin
   this.articleMarginTop = parseInt(options.articleMarginTop) || 0
-  //初始化的
+  // 初始化的
   this.currentTitleElement = null
   this._init()
 }
@@ -36,10 +36,10 @@ TocScrollSpy.prototype._collectTitleElementScrollTops = function () {
   }
   if (this._elTitlesNames.length === 0) return
 
-  //剔除超过限定级别的h标签
+  // 剔除超过限定级别的h标签
   this._elTitlesNames.length = this._elTitlesNames.length > this.spayLevel ? this.spayLevel : this._elTitlesNames.length
 
-  //获取所有需要的h标签
+  // 获取所有需要的h标签
   let articleElementChildren = this.articleElement.children
   for (let i = 0; i < articleElementChildren.length; i++) {
     this._elChildName = articleElementChildren[i].tagName.toLowerCase()
@@ -53,7 +53,7 @@ TocScrollSpy.prototype._collectTitleElementScrollTops = function () {
 TocScrollSpy.prototype._getElementTop = function (element) {
   let actualTop = element.offsetTop
   let current = element.offsetParent
-  while(current !== null) {
+  while (current !== null) {
     actualTop += current.offsetTop
     current = current.offsetTop
   }
@@ -82,9 +82,9 @@ TocScrollSpy.prototype._bindSpy = function () {
 }
 
 TocScrollSpy.prototype._handleScroll = function () {
-  //获取滚动距离
+  // 获取滚动距离
   let windowScrollTop = this._getPageScroll().top
-  //筛选哪个标签离得近
+  // 筛选哪个标签离得近
   let fitDistance = windowScrollTop + this.articleMarginTop
   let distances = []
   this.elTitleElementScrollTops.map(function (scrollTop, index) {

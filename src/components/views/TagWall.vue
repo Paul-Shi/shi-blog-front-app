@@ -9,36 +9,36 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Panel from '@/components/utils/Panel'
-  import {mixin} from '@/utils/index'
+import Panel from '@/components/utils/Panel'
+import {mixin} from '@/utils/index'
 
-  export default {
-    data () {
-      return {
-        tagList: []
-      }
-    },
-    components: {
-      'panel': Panel
-    },
-    mixins: [mixin],
-    created() {
-      this.listTag()
-    },
-    methods: {
-      listTag () {
-        this.$http({
-          url: this.$http.adornUrl('/operation/tags'),
-          method: 'get',
-          params: this.$http.adornParams()
-        }).then(({data}) => {
-          if (data && data.code === 200) {
-            this.tagList = data.tagList
-          }
-        })
-      }
+export default {
+  data () {
+    return {
+      tagList: []
+    }
+  },
+  components: {
+    'panel': Panel
+  },
+  mixins: [mixin],
+  created () {
+    this.listTag()
+  },
+  methods: {
+    listTag () {
+      this.$http({
+        url: this.$http.adornUrl('/operation/tags'),
+        method: 'get',
+        params: this.$http.adornParams()
+      }).then(({data}) => {
+        if (data && data.code === 200) {
+          this.tagList = data.tagList
+        }
+      })
     }
   }
+}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

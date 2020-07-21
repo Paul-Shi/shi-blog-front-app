@@ -14,38 +14,42 @@
 </template>
 
 <script type="text/ecmascript-6">
-  export default {
-    props: {
-      tipText: {
-        default: '浏览更多'
-      },
-      noMoreData: {
-        default: false
-      }
+export default {
+  props: {
+    tipText: {
+      default: '浏览更多'
     },
-    data () {
-      return {
-        loading: false
+    noMoreData: {
+      default: false
+    }
+  },
+  data () {
+    return {
+      loading: false
+    }
+  },
+  computed: {
+    tipStr: function () {
+      let isNoMore = this.noMoreData
+      return isNoMore ? '暂无更多' : '浏览更多'
+    }
+  },
+  methods: {
+    browseMore () {
+      if (this.noMoreData) {
+        this.loading = false
+        return
       }
+      this.loading = true
+      this.$emit('browseMore')
+      this.loading = false
     },
-    computed: {
-      tipStr: function () {
-        let isNoMore = this.noMoreData
-        return isNoMore ? '暂无更多' : '浏览更多'
-      }
-    },
-    methods: {
-      browseMore () {
-        if (this.noMoreData) {
-          this.loading = false
-          return
-        }
-        this.loading = true
-        this.$emit('browseMore')
-        this.loading = noMoreData
-      }
+    stopLoading (noMoreData) {
+      this.loading = false
+      this.noMoreData = noMoreData
     }
   }
+}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

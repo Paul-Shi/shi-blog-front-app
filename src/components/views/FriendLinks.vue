@@ -17,36 +17,35 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Panel from '@/components/utils/Panel'
+import Panel from '@/components/utils/Panel'
 
-  export default {
-    data() {
-      return {
-        linkList: []
-      }
-    },
-    created() {
-      this.lisLink()
-    },
-    components: {
-      'panel': Panel
-    },
-    methods: {
-      listLink () {
-        this.$http({
-          url: this.$http.adornUrl('/operation/links'),
-          method: 'get',
-          params: this.$http.adornParams()
-        }).then(({data}) => {
-          if (data && data.code === 200) {
-            this.linkList = data.linkList
-          }
-        })
-      }
+export default {
+  data () {
+    return {
+      linkList: []
+    }
+  },
+  created () {
+    this.lisLink()
+  },
+  components: {
+    'panel': Panel
+  },
+  methods: {
+    listLink () {
+      this.$http({
+        url: this.$http.adornUrl('/operation/links'),
+        method: 'get',
+        params: this.$http.adornParams()
+      }).then(({data}) => {
+        if (data && data.code === 200) {
+          this.linkList = data.linkList
+        }
+      })
     }
   }
+}
 </script>
-
 
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/theme.styl";

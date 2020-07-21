@@ -96,14 +96,13 @@ export default {
           post.likeNum += 1
           this.$Message.success('点赞成功')
         }
-      }).catch((erroe) => {
+      }).catch((error) => {
         console.log(error)
       })
     }
   }
 }
 </script>
-
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../../common/stylus/index.styl";

@@ -8,32 +8,31 @@
 </template>
 
 <script type="text/ecmascript-6">
-  export default {
-    props: {
-      dateType: {
-        default: 'year'
-      },
-      date: '',
-      count: '',
-      tipText: {
-        default: 'View All'
-      },
-      hrefText: ''
+export default {
+  props: {
+    dateType: {
+      default: 'year'
     },
-    computed: {
-      styleType() {
-        return 'style-date' + this.dateType
-      },
-      iconType() {
-        return {
-          'ivu-ivon-calendar': this.dateType === 'year',
-          'ivu-icon-clock': this.dateType === 'month'
-        }
+    date: '',
+    count: '',
+    tipText: {
+      default: 'View All'
+    },
+    hrefText: ''
+  },
+  computed: {
+    styleType () {
+      return 'style-date' + this.dateType
+    },
+    iconType () {
+      return {
+        'ivu-ivon-calendar': this.dateType === 'year',
+        'ivu-icon-clock': this.dateType === 'month'
       }
     }
   }
+}
 </script>
-
 
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../../common/stylus/index.styl"

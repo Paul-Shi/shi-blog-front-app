@@ -24,44 +24,43 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import TimeLineHeader from '@/components/views/TimeLine/TimeLineHeader'
-  import ArchiveListCell from '@/components/views/Archive/ArchiveListCell'
-  import ArchiveListTimeTitle from '@/components/views/Archive/ArchiveListTimeTitle'
-  import Recommend from '@/components/views/Recommend'
-  import TagWall from '@/components/views/TagWall'
+import TimeLineHeader from '@/components/views/TimeLine/TimeLineHeader'
+import ArchiveListCell from '@/components/views/Archive/ArchiveListCell'
+import ArchiveListTimeTitle from '@/components/views/Archive/ArchiveListTimeTitle'
+import Recommend from '@/components/views/Recommend'
+import TagWall from '@/components/views/TagWall'
 
-  export default {
-    data () {
-      return {
-        timelineList: []
-      }
-    },
-    components: {
-      'timeline-header': TimeLineHeader,
-      'archive-list-time-title': ArchiveListTimeTitle,
-      'archive-list-cell': ArchiveListCell,
-      'recommend': Recommend,
-      'tag-wall': TagWall
-    },
-    created() {
-      this.listTimeline()
-    },
-    methods: {
-      listTimeline () {
-        this.$http({
-          url: this.$http.adornUrl('/timeline'),
-          method: 'get',
-          params: this.$http.adornParams()
-        }).then(({data}) => {
-          if (data && data.code === 200) {
-            this.timelineList = data.timelineList
-          }
-        })
-      }
+export default {
+  data () {
+    return {
+      timelineList: []
+    }
+  },
+  components: {
+    'timeline-header': TimeLineHeader,
+    'archive-list-time-title': ArchiveListTimeTitle,
+    'archive-list-cell': ArchiveListCell,
+    'recommend': Recommend,
+    'tag-wall': TagWall
+  },
+  created () {
+    this.listTimeline()
+  },
+  methods: {
+    listTimeline () {
+      this.$http({
+        url: this.$http.adornUrl('/timeline'),
+        method: 'get',
+        params: this.$http.adornParams()
+      }).then(({data}) => {
+        if (data && data.code === 200) {
+          this.timelineList = data.timelineList
+        }
+      })
     }
   }
+}
 </script>
-
 
 <style lang="stylus" rel="stylesheet/stylus">
   .timeline-content

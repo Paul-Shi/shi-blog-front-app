@@ -21,8 +21,8 @@ Vue.use(Router)
 
 let router = new Router({
   mode: 'history',
-  scrollBehavior: () => ({ y: 0}),
-  routes:[
+  scrollBehavior: () => ({y: 0}),
+  routes: [
     {
       path: '/',
       name: 'Index',
@@ -144,7 +144,7 @@ let router = new Router({
   ]
 })
 
-//配置加载进度条
+// 配置加载进度条
 LoadingBar.config({
   color: '#5cb85c',
   failedColor: '#f0ad4e',

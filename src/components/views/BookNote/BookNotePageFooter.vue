@@ -1,7 +1,7 @@
 <template>
   <div class="article-page-footer">
     <license-tag></license-tag>
-    <social-section :type="'Article'" :postId="postId"></social-section>
+    <social-section :post-id="postId" :type="'BookNote'"></social-section>
   </div>
 </template>
 
@@ -10,6 +10,11 @@ import LicenseTag from '@/components/views/LicenseTag'
 import SocialSection from '@/components/views/Comment/SocialSection'
 
 export default {
+  methods: {
+    onSubmit () {
+      console.log('submit!')
+    }
+  },
   components: {
     'license-tag': LicenseTag,
     'social-section': SocialSection

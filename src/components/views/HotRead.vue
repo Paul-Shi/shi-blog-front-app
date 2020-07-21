@@ -36,40 +36,39 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {mixin} from '@/utils/index'
-  import Panel from '@/components/utils/Panel'
+import {mixin} from '@/utils/index'
+import Panel from '@/components/utils/Panel'
 
-  export default {
-    data () {
-      return {
-        hotReadList: [],
-        topHotRead: {}
-      }
-    },
-    mixins: [mixin],
-    created() {
-      this.listHotRead()
-    },
-    methods: {
-      listHotRead () {
-        this.$http({
-          url: this.$http.adornUrl('/operation/hotReads'),
-          method: 'get',
-          params: this.$http.adornParams()
-        }).then(({data}) => {
-          if (data && data.code === 200) {
-            this.hotReadList = data.hotReadList
-            this.topHotRead = this.hotReadList.shift()
-          }
-        })
-      }
-    },
-    components: {
-      'panel': Panel
+export default {
+  data () {
+    return {
+      hotReadList: [],
+      topHotRead: {}
     }
+  },
+  mixins: [mixin],
+  created () {
+    this.listHotRead()
+  },
+  methods: {
+    listHotRead () {
+      this.$http({
+        url: this.$http.adornUrl('/operation/hotReads'),
+        method: 'get',
+        params: this.$http.adornParams()
+      }).then(({data}) => {
+        if (data && data.code === 200) {
+          this.hotReadList = data.hotReadList
+          this.topHotRead = this.hotReadList.shift()
+        }
+      })
+    }
+  },
+  components: {
+    'panel': Panel
   }
+}
 </script>
-
 
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/index.styl";

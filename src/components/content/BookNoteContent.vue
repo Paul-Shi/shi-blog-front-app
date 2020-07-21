@@ -24,87 +24,90 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import BookNotePageHeader from '@/components/views/BookNote/BookNotePageHeader'
-  import BookNotePageContent from '@/components/views/BookNote/BookNotePageContent'
-  import BookNotePageFooter from '@/components/views/BookNote/BookNotePageFooter'
-  import About from '@/components/views/About'
-  import FriendLinks from '@/components/views/FriendLinks'
-  import SideToc from '@/components/views/SideToc'
-  import Recommend from '@/components/views/Recommend'
-  import TOC from '@/common/js/MarkdownToc'
-  import TocScrollSpy from '@/common/js/TocScrollSpy'
+import BookNotePageHeader from '@/components/views/BookNote/BookNotePageHeader'
+import BookNotePageContent from '@/components/views/BookNote/BookNotePageContent'
+import BookNotePageFooter from '@/components/views/BookNote/BookNotePageFooter'
+import About from '@/components/views/About'
+import FriendLinks from '@/components/views/FriendLinks'
+import SideToc from '@/components/views/SideToc'
+import Recommend from '@/components/views/Recommend'
+import TOC from '@/common/js/MarkdownToc'
+import TocScrollSpy from '@/common/js/TocScrollSpy'
 
-  export default {
-    data () {
-      return {
-        bookNote: {}
-      }
-    },
-    components: {
-      'bookNote-page-header': BookNotePageHeader,
-      'bookNote-page-content': BookNotePageContent,
-      'bookNote-page-footer': BookNotePageFooter,
-      'about': About,
-      'friend-links': FriendLinks,
-      'side-toc': SideToc,
-      'recommend': Recommend
-    },
-    created: function () {
-      this.getBookNote(this.$route.params.bookNoteId)
-    },
-    methods: {
-      addCodeLineNumber () {
-        // 添加行号
-        let blocks = this.$refs.article.querySelectorAll('pre code')
-        blocks.forEach((block) => {
-          window.hljs.highlightBlock(block)
-          // 去前后空格并添加行号
-          block.innerHTML = '<ul><li>' + block.innerHTML.replace(/(^\s*)|(\s*$)/g, '').replace(/\n/g, '\n</li><li>') + '\n</li></ul>'
-        })
-      },
-      getBookNote (bookNoteId) {
-        this.$http({
-          url: this.$http.adornUrl('/bookNote/' + bookNoteId),
-          method: 'get'
-        }).then(({date}) => {
-          if(data && data.code === 200) {
-            this.bookNote = data.bookNote
-            // 更新目录、高亮代码
-            this.$nextTick(function () {
-              this.addCodeLineNumber()
-              this.refreshDiectory()
-              this.refreshMobileDirectory()
-              document.title = this.bookNote.title + ' | Paul`s Blog | 一个Java后端程序员'
-            })
-          }
-        })
-      },
-      refreshDiectory () {
-        new TOC('article-main-page', {
-          'level': 5,
-          'top': 200,
-          'class': 'list',
-          'targetId': 'side-toc'
-        })
-        new TocScrollSpy('article-main-page', 'side-toc', {
-          'spayLevel': 5,
-          'articleMarginTop': 0
-        });
-      },
-      refreshMobileDirectory () {
-        new TOC('article-main-page', {
-          'level': 5,
-          'top': 200,
-          'class': 'list',
-          'targetId': 'sidebar-toc'
-        });
-        new TocScrollSpy('article-main-page', 'sidebar-toc', {
-          'spayLevel': 5,
-          'articleMarginTop': 15
-        });
-      }
+export default {
+  data () {
+    return {
+      bookNote: {}
     }
-  };
+  },
+  components: {
+    'bookNote-page-header': BookNotePageHeader,
+    'bookNote-page-content': BookNotePageContent,
+    'bookNote-page-footer': BookNotePageFooter,
+    'about': About,
+    'friend-links': FriendLinks,
+    'side-toc': SideToc,
+    'recommend': Recommend
+  },
+  created: function () {
+    this.getBookNote(this.$route.params.bookNoteId)
+  },
+  methods: {
+    addCodeLineNumber () {
+      // 添加行号
+      let blocks = this.$refs.article.querySelectorAll('pre code')
+      blocks.forEach((block) => {
+        window.hljs.highlightBlock(block)
+        // 去前后空格并添加行号
+        block.innerHTML = '<ul><li>' + block.innerHTML.replace(/(^\s*)|(\s*$)/g, '').replace(/\n/g, '\n</li><li>') + '\n</li></ul>'
+      })
+    },
+    getBookNote (bookNoteId) {
+      this.$http({
+        url: this.$http.adornUrl('/bookNote/' + bookNoteId),
+        method: 'get'
+      }).then(({data}) => {
+        if (data && data.code === 200) {
+          this.bookNote = data.bookNote
+          // 更新目录、高亮代码
+          this.$nextTick(function () {
+            this.addCodeLineNumber()
+            this.refreshDiectory()
+            this.refreshMobileDirectory()
+            document.title = this.bookNote.title + ' | Paul`s Blog | 一个Java后端程序员'
+          })
+        }
+      })
+    },
+    refreshDiectory () {
+      /* eslint-disable*/
+      new TOC('article-main-page', {
+        'level': 5,
+        'top': 200,
+        'class': 'list',
+        'targetId': 'side-toc'
+      })
+      /* eslint-disable */
+      new TocScrollSpy('article-main-page', 'side-toc', {
+        'spayLevel': 5,
+        'articleMarginTop': 0
+      });
+    },
+    refreshMobileDirectory () {
+      /* eslint-disable */
+      new TOC('article-main-page', {
+        'level': 5,
+        'top': 200,
+        'class': 'list',
+        'targetId': 'sidebar-toc'
+      });
+      new TocScrollSpy('article-main-page', 'sidebar-toc', {
+        'spayLevel': 5,
+        'articleMarginTop': 15
+      });
+    }
+  }
+};
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

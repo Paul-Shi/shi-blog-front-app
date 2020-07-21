@@ -14,29 +14,28 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {mixin} from '@/utils'
+import {mixin} from '@/utils'
 
-  export default {
-    name: 'archive-list-cell',
-    props: {
-      post: {
-        Type: Object
-      }
-    },
-    mixins: [mixin],
-    data() {
-      return {
-        showDesc: false
-      }
-    },
-    methods: {
-      seeDesc() {
-        this.showDesc = !this.showDesc
-      }
+export default {
+  name: 'archive-list-cell',
+  props: {
+    post: {
+      Type: Object
+    }
+  },
+  mixins: [mixin],
+  data () {
+    return {
+      showDesc: false
+    }
+  },
+  methods: {
+    seeDesc () {
+      this.showDesc = !this.showDesc
     }
   }
+}
 </script>
-
 
 <style lang="stylus" type="text/stylus" rel="stylesheet/stylus">
   @import "../../../common/stylus/theme.styl"

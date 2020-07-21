@@ -1,13 +1,13 @@
 <template>
-  <div class="article-list-header">
-    <classify-menu @filterByCategory="filterByCategory" :categorys="categorys" :defaultCategory="defaultCategory"></classify-menu>
-    <section-title :mainTitle="mainTitle" :subTitle="subTitle">
-      <title-menu-filter @filterByMenu="filterByMenu" slot="menu" :menu-filter-list="defaultFilterList"></title-menu-filter>
-    </section-title>
-  </div>
+    <div class="article-list-header">
+      <classify-menu @filterByCategory="filterByCategory" :categorys="categorys"></classify-menu>
+      <section-title :main-title="mainTitle" :subtitle="subTitle">
+        <title-menu-filter @filterByMenu="filterByMenu" slot="menu" :menu-filter-list="filterList || defaultFilterList"></title-menu-filter>
+      </section-title>
+    </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
 import SectionTitle from '@/components/views/SectionTitle/SectionTitle'
 import ClassifyMenu from '@/components/views/Classify/ClassifyMenu'
 import TitleMenuFilter from '@/components/views/SectionTitle/TitleMenuFilter'
@@ -27,9 +27,9 @@ export default {
   },
   props: {
     categorys: Array,
-    defaultCategory: '',
     mainTitle: '',
-    subtitle: ''
+    subTitle: '',
+    filterList: Array
   },
   methods: {
     filterByMenu (params) {
@@ -41,3 +41,7 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" rel="stylesheet/stylus">
+
+</style>

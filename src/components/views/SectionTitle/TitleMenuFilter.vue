@@ -12,36 +12,36 @@
 </template>
 
 <script type="text/ecmascript-6">
-  export default {
-    props: {
-      menuFilterList: Array
+export default {
+  props: {
+    menuFilterList: Array
+  },
+  computed: {
+    filterList () {
+      return this.menuFilterList
+    }
+  },
+  methods: {
+    refesh () {
+      this.$router.go(0)
     },
-    computed: {
-      filterList () {
-        return this.menuFilterList
-      }
+    filterByMenu (type) {
+      this.replaceActive(type)
+      let param = {}
+      param[type] = true
+      this.$emit('filterByMenu', param)
     },
-    methods: {
-      refesh() {
-        this.$router.go(0)
-      },
-      filterByMenu (type) {
-        this.replaceActive(type)
-        let param = {}
-        param[type] = true
-        this.$emit('filterByMenu', param)
-      },
-      replaceActive(type) {
-        this.menuFilterList.map((menuFilter) => {
-          if (menuFilter.type === type) {
-            menuFilter.active = true
-          } else {
-            menuFilter.active = false
-          }
-        })
-      }
+    replaceActive (type) {
+      this.menuFilterList.map((menuFilter) => {
+        if (menuFilter.type === type) {
+          menuFilter.active = true
+        } else {
+          menuFilter.active = false
+        }
+      })
     }
   }
+}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>

@@ -2,10 +2,9 @@ import axios from 'axios'
 import qs from 'qs' // 字符串处理
 import merge from 'lodash/merge' // 合并对象工具
 
-const http = axios.created({
+const http = axios.create({
   timeout: 1000 * 30,
-  // 当前请求为跨域类型时是否在请求中携带cookie
-  withCredentials: true,
+  withCredentials: true, // 当前请求为跨域类型时是否在请求中协带cookie
   headers: {
     'Content-Type': 'application/json;charset=utf-8'
   }

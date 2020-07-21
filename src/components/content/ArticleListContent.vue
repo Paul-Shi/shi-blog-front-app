@@ -23,122 +23,122 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import ArticleListHeader from '@/components/views/Article/ArticleListHeader'
-  import ArticlePageContent from '@/components/views/Article/ArticlePageContent'
-  import ArticlePageFooter from '@/components/views/Article/ArticlePageFooter'
-  import ArticleListCell from '@/components/views/Article/ArticleListCell'
-  import Recommend from '@/components/views/Recommend'
-  import TagWall from '@/components/views/TagWall'
-  import BrowseMore from '@/components/views/BrowseMore'
-  import merge from 'lodash/merge'
-  import {treeDataTranslate} from '@/utils'
-  export default {
-    data () {
-      return {
-        articleList: [],
-        categoryList: [],
-        selected_category: this.$route.query.categoryId,
-        currentPage: 1,
-        pageSize: 15,
-        categoryId: this.$route.query.categoryId,
-        menuParams: {
-          latest: true
-        },
-        noMoreData: false
-      }
-    },
-    created () {
-      this.listArticle()
-      this.listCategory()
-    },
-    methods: {
-      listArticle () {
-        let params = {
-          categoryId: this.categoryId,
-          limit: this.pageSize,
-          page: this.currentPage
-        }
-        params = merge(params, this.menuParams)
-        this.$http({
-          url: this.$http.adornUrl('/articles'),
-          params: this.$http.adornParams(params),
-          method: 'get'
-        }).then(({data}) => {
-          if (data && data.code === 200) {
-            if (data.page.totalPage <= data.page.currPage) {
-              this.noMoreData = true
-            } else {
-              this.noMoreData = false
-            }
-            this.articleList = data.page.list
-          }
-        })
+import ArticleListHeader from '@/components/views/Article/ArticleListHeader'
+import ArticlePageContent from '@/components/views/Article/ArticlePageContent'
+import ArticlePageFooter from '@/components/views/Article/ArticlePageFooter'
+import ArticleListCell from '@/components/views/Article/ArticleListCell'
+import Recommend from '@/components/views/Recommend'
+import TagWall from '@/components/views/TagWall'
+import BrowseMore from '@/components/views/BrowseMore'
+import merge from 'lodash/merge'
+import {treeDataTranslate} from '@/utils'
+export default {
+  data () {
+    return {
+      articleList: [],
+      categoryList: [],
+      selected_category: this.$route.query.categoryId,
+      currentPage: 1,
+      pageSize: 15,
+      categoryId: this.$route.query.categoryId,
+      menuParams: {
+        latest: true
       },
-      listCategory () {
-        let params = {}
-        params.type = 0
-        this.$http({
-          url: this.$http.adornUrl('/operation/categories'),
-          method: 'get',
-          params: this.$http.adornParams(params)
-        }).then(({data}) => {
-          if (data && data.code === 200) {
-            this.categoryList = treeDataTranslate(data.categoryList)
-          }
-        })
-      },
-      filterByMenu (params) {
-        this.resetCurrentPage()
-        this.menuParams = params
-        this.listArticle()
-      },
-      filterByCategory (params) {
-        this.resetCurrentPage()
-        this.categoryId = params
-        this.listArticle()
-      },
-      resetCurrentPage () {
-        this.currentPage = 1
-      },
-      browseMore () {
-        this.currentPage++
-        let params = {
-          categoryId: this.categoryId,
-          limit: this.pageSize,
-          page: this.currentPage
-        }
-        params = merge(params, this.menuParams)
-        this.$http({
-          url: this.$http.adornUrl('/articles'),
-          params: this.$http.adornParams(params),
-          method: 'get'
-        }).then(({data}) => {
-          if (data && data.code === 200) {
-            if (data.page.totalPage <= data.page.currPage) {
-              this.noMoreData = true
-            } else {
-              this.noMoreData = false
-            }
-            this.articleList = this.articleList.concat(data.page.list)
-          }
-        }).then(response => {
-          this.$refs.browseMore.stopLoading()
-        }).catch(error => {
-          this.$refs.browseMore.stopLoading()
-          console.log(error)
-        })
-      }
-    },
-    components: {
-      'article-list-header': ArticleListHeader,
-      'article-page-content': ArticlePageContent,
-      'article-page-footer': ArticlePageFooter,
-      'article-list-cell': ArticleListCell,
-      'recommend': Recommend,
-      'tag-wall': TagWall,
-      'browse-more': BrowseMore
+      noMoreData: false
     }
+  },
+  created () {
+    this.listArticle()
+    this.listCategory()
+  },
+  methods: {
+    listArticle () {
+      let params = {
+        categoryId: this.categoryId,
+        limit: this.pageSize,
+        page: this.currentPage
+      }
+      params = merge(params, this.menuParams)
+      this.$http({
+        url: this.$http.adornUrl('/articles'),
+        params: this.$http.adornParams(params),
+        method: 'get'
+      }).then(({data}) => {
+        if (data && data.code === 200) {
+          if (data.page.totalPage <= data.page.currPage) {
+            this.noMoreData = true
+          } else {
+            this.noMoreData = false
+          }
+          this.articleList = data.page.list
+        }
+      })
+    },
+    listCategory () {
+      let params = {}
+      params.type = 0
+      this.$http({
+        url: this.$http.adornUrl('/operation/categories'),
+        method: 'get',
+        params: this.$http.adornParams(params)
+      }).then(({data}) => {
+        if (data && data.code === 200) {
+          this.categoryList = treeDataTranslate(data.categoryList)
+        }
+      })
+    },
+    filterByMenu (params) {
+      this.resetCurrentPage()
+      this.menuParams = params
+      this.listArticle()
+    },
+    filterByCategory (params) {
+      this.resetCurrentPage()
+      this.categoryId = params
+      this.listArticle()
+    },
+    resetCurrentPage () {
+      this.currentPage = 1
+    },
+    browseMore () {
+      this.currentPage++
+      let params = {
+        categoryId: this.categoryId,
+        limit: this.pageSize,
+        page: this.currentPage
+      }
+      params = merge(params, this.menuParams)
+      this.$http({
+        url: this.$http.adornUrl('/articles'),
+        params: this.$http.adornParams(params),
+        method: 'get'
+      }).then(({data}) => {
+        if (data && data.code === 200) {
+          if (data.page.totalPage <= data.page.currPage) {
+            this.noMoreData = true
+          } else {
+            this.noMoreData = false
+          }
+          this.articleList = this.articleList.concat(data.page.list)
+        }
+      }).then(response => {
+        this.$refs.browseMore.stopLoading()
+      }).catch(error => {
+        this.$refs.browseMore.stopLoading()
+        console.log(error)
+      })
+    }
+  },
+  components: {
+    'article-list-header': ArticleListHeader,
+    'article-page-content': ArticlePageContent,
+    'article-page-footer': ArticlePageFooter,
+    'article-list-cell': ArticleListCell,
+    'recommend': Recommend,
+    'tag-wall': TagWall,
+    'browse-more': BrowseMore
   }
+}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

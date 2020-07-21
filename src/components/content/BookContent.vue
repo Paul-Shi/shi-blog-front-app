@@ -62,48 +62,48 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {VueTabs, VTab} from 'vue-nav-tabs'
-  import 'vue-nav-tabs/themes/paper.css'
-  import BookCatalog from '@/components/views/Book/BookCatalog'
-  import Recommend from '@/components/views/Recommend'
-  import SocialSection from '@/components/views/Comment/SocialSection'
-  import SideToc from '@/components/views/SideToc'
-  import {mixin} from '@/utils'
+import {VueTabs, VTab} from 'vue-nav-tabs'
+import 'vue-nav-tabs/themes/paper.css'
+import BookCatalog from '@/components/views/Book/BookCatalog'
+import Recommend from '@/components/views/Recommend'
+import SocialSection from '@/components/views/Comment/SocialSection'
+import SideToc from '@/components/views/SideToc'
+import {mixin} from '@/utils'
 
-  export default {
-    name: 'book-content',
-    data () {
-      return {
-        book: {}
-      }
-    },
-    mixins: [mixin],
-    components: {
-      'vue-tabs': VueTabs,
-      'v-tab': VTab,
-      'book-catalog': BookCatalog,
-      'social-section': SocialSection,
-      'recommend': Recommend,
-      'side-toc': SideToc
-    },
-    created() {
-      this.getBook(this.$route.params.bookId)
-    },
-    methods: {
-      getBook (bookId) {
-        this.$http({
-          url: this.$http.adornUrl('/book/' + bookId),
-          method: 'get',
-          params: this.$http.adornParams()
-        }).then(({data}) => {
-          if (data && data.code === 200) {
-            this.book = data.book
-            document.title = this.book.title + ' | Paul`s Blog | 一个Java后端程序员 '
-          }
-        })
-      }
+export default {
+  name: 'book-content',
+  data () {
+    return {
+      book: {}
+    }
+  },
+  mixins: [mixin],
+  components: {
+    'vue-tabs': VueTabs,
+    'v-tab': VTab,
+    'book-catalog': BookCatalog,
+    'social-section': SocialSection,
+    'recommend': Recommend,
+    'side-toc': SideToc
+  },
+  created () {
+    this.getBook(this.$route.params.bookId)
+  },
+  methods: {
+    getBook (bookId) {
+      this.$http({
+        url: this.$http.adornUrl('/book/' + bookId),
+        method: 'get',
+        params: this.$http.adornParams()
+      }).then(({data}) => {
+        if (data && data.code === 200) {
+          this.book = data.book
+          document.title = this.book.title + ' | Paul`s Blog | 一个Java后端程序员 '
+        }
+      })
     }
   }
+}
 </script>
 
 <style lang="stylus" type="text/stylus" rel="stylesheet/stylus">

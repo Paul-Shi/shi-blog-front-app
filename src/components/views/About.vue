@@ -2,7 +2,7 @@
   <div class="about">
     <img class="background" src="../../assets/background.jpg" alt="">
     <img class="avatar" src="../../assets/avatar.jpg" alt="">
-    <p class="name">Yuan</p>
+    <p class="name">Paul</p>
     <p class="desc">Write the code, Change the World</p>
     <ul class="social">
       <li><a href="https://github.com/llldddbbb" target="_blank"><img src="../../assets/icon/GitHub.png" alt=""></a></li>
@@ -40,16 +40,16 @@
         </iv-col>
         <iv-col :span="18">
           <iv-progress status="active" :hide-info="true" :stroke-width="8" :percent="30" class="bar"></iv-progress>
-        </iv-col>
+        </iv-col>a
       </iv-row>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  export default {
+export default {
 
-  }
+}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>

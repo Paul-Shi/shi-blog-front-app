@@ -1,38 +1,39 @@
 <template>
-  <div class="article-page-header">
+  <div class="bookNote-page-header">
     <div class="tags">
-      <iv-tag :color="tag.id | mapTagColor" v-for="(tag) in article.tagList" :key="tag.id">{{tag.name}}</iv-tag>
+      <iv-tag :color="tag.id | mapTagColor" v-for="(tag) in bookNote.tagList" :key="tag.id">{{tag.name}}</iv-tag>
     </div>
-    <p class="title">{{article.title}}</p>
+    <p class="title">{{bookNote.title}}</p>
     <iv-row>
-      <iv-col :xs="24" :sm="10" :md="10" :lg="10" style="padding-left: 0;padding-right: 0;">
-        <p class="info"><span class="author">By / <a >{{article.author}}</a></span><span
-          class="publish-time">  At time / <a >{{article.createTime | socialDate}}</a></span></p>
+      <iv-col :xs="24" :sm="10" :lg="10" style="padding-left: 0;padding-right: 0;">
+        <p class="info"><span class="author">By / <a>{{bookNote.author}}</a></span>
+        <span class="publish-time"> At time / <a>{{bookNote.createTime | socialDate}}</a></span> </p>
       </iv-col>
       <iv-col :xs="24" :sm="14" :md="14" :lg="14" style="padding-left: 0;padding-right: 0;">
         <p class="operate_info">
-          <span class="readings"><a ><iv-icon type="eye"></iv-icon> {{article.readNum}} 阅读</a></span> |
-          <span class="likes"><a @click="likePost(article)"><iv-icon type="heart"></iv-icon> {{article.likeNum}} 喜欢</a></span>
+          <span class="readings"><a ><iv-icon type="eye"></iv-icon> {{bookNote.readNum}} 阅读</a></span> |
+          <span class="likes"><a @click="likePost(bookNote)"><iv-icon type="heart"></iv-icon> {{bookNote.likeNum}} 喜欢</a></span>
         </p>
       </iv-col>
     </iv-row>
-    <p class="abstract" v-if="article.description">
-      {{article.description}}
+    <p class="abstract" v-if="bookNote.description">
+      {{bookNote.description}}
     </p>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import { mixin } from '@/utils'
+import {mixin} from '@/utils'
+
 export default {
   props: {
-    article: {}
+    bookNote: {}
   },
   mixins: [mixin],
   methods: {
     likePost (post) {
       this.$http({
-        url: this.$http.adornUrl('/article/like/' + post.id),
+        url: this.$http.adornUrl('/bookNote/like' + post.id),
         method: 'put',
         data: this.$http.adornData()
       }).then(({data}) => {
@@ -51,7 +52,7 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../../common/stylus/index.styl";
 
-  .article-page-header
+  .bookNote-page-header
     text-align left
     padding 25px 5px 10px 5px
     @media only screen and (max-width: 768px)

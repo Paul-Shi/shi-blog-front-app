@@ -30,51 +30,49 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import { mixin } from '@/utils'
-  const ARTICLE_TYPE_NO_IMAGE = 2
+import { mixin } from '@/utils'
+const ARTICLE_TYPE_NO_IMAGE = 2
 
-  export default {
-    props: {
-      book: {
-        Type: Object
-      },
-      type: ''
+export default {
+  props: {
+    book: {
+      Type: Object
     },
-    mixins: [mixin],
-    computed: {
-      textOrderType: function () {
-        return ARTICLE_TYPE_NO_IMAGE
-      },
-      textSpan: function () {
-        return 24
-      },
-      imgSpan: function () {
-        return 0
-      },
-      themeClass: function () {
-        return ''
-      }
+    type: ''
+  },
+  mixins: [mixin],
+  computed: {
+    textOrderType: function () {
+      return ARTICLE_TYPE_NO_IMAGE
     },
-    methods: {
-      likePost (post) {
-        this.$http({
-          url: this.$http.adornUrl('/book/like', post.id),
-          method: 'put',
-          data: this.$http.adornData()
-        }).then(({data}) => {
-          if (data && data.code === 200) {
-            post.likeNum += 1
-            this.$Message.success('点赞成功')
-          }
-        }).catch((erroe) => {
-          console.log(error)
-        })
-      }
+    textSpan: function () {
+      return 24
+    },
+    imgSpan: function () {
+      return 0
+    },
+    themeClass: function () {
+      return ''
+    }
+  },
+  methods: {
+    likePost (post) {
+      this.$http({
+        url: this.$http.adornUrl('/book/like', post.id),
+        method: 'put',
+        data: this.$http.adornData()
+      }).then(({data}) => {
+        if (data && data.code === 200) {
+          post.likeNum += 1
+          this.$Message.success('点赞成功')
+        }
+      }).catch((error) => {
+        console.log(error)
+      })
     }
   }
+}
 </script>
-
-
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../../common/stylus/index.styl";
