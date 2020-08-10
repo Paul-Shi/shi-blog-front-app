@@ -93,7 +93,7 @@ export default {
   mixins: [mixin],
   computed: {
     textOrderType: function () {
-      return this.book.coverType === ARTICLE_TYPE_BIG_IMAGE ? 2 : 1
+      return this.bookNote.coverType === ARTICLE_TYPE_BIG_IMAGE ? 2 : 1
     },
     imgOrderType: function () {
       return this.bookNote.coverType === ARTICLE_TYPE_BIG_IMAGE ? 1 : 2

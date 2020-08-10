@@ -45,6 +45,9 @@ export default {
     textOrderType: function () {
       return ARTICLE_TYPE_NO_IMAGE
     },
+    imgOrderType: function () {
+      return ARTICLE_TYPE_NO_IMAGE
+    },
     textSpan: function () {
       return 24
     },
