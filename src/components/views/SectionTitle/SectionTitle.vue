@@ -17,7 +17,7 @@
 export default {
   props: {
     mainTitle: '',
-    subtitle: '',
+    subTitle: '',
     tipText: '',
     tipHref: ''
   }

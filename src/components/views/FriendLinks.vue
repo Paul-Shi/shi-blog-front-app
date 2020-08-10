@@ -26,7 +26,7 @@ export default {
     }
   },
   created () {
-    this.lisLink()
+    this.listLink()
   },
   components: {
     'panel': Panel

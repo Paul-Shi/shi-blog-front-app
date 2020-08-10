@@ -1,34 +1,29 @@
-`````
 <template>
   <div class="article-cell">
     <a>
       <iv-row type="flex">
-        <iv-col :xs="24" :sm="24" :md="textSpan" :lg="textSpan" :order="textOrderType"
-                style="padding-left: 0;padding-right: 0;">
+        <iv-col :xs="24" :sm="24" :md="textSpan" :lg="textSpan" :order="textOrderType" style="padding-left: 0;padding-right: 0;">
           <div class="text-wrapper">
             <h4 class="title">
-              <a :href="'/article' + article.id">{{article.title}}</a>
-              <span class="special" v-if="article.top>0" title="置顶">
-              </span>
+              <a :href="'/article/' + article.id">{{article.title}}</a>
+              <span class="special" v-if="article.top>0" title="置顶">置顶</span>
             </h4>
             <div class="tags">
               <iv-tag :color="tag.id | mapTagColor" :key="tag.id" type="border" v-for="(tag) in article.tagList">
                 {{tag.name}}
               </iv-tag>
             </div>
-            <p class="desc">{{article.description | filterHtml | textLineBreak(70)}}<a href="'/article/' + article.id">查看更多
+            <p class="desc">{{article.description | filterHtml | textLineBreak(70) }}<a :href="'/article/' + article.id"> 查看更多
               <iv-icon type="arrow-right-b"></iv-icon>
             </a></p>
             <p class="operate-info">
               <span class="publish-time">At time / <a>{{article.createTime | socialDate}}</a></span>
               <span class="readings"><a><iv-icon type="eye"></iv-icon>{{article.readNum}} 阅读</a></span>
-              <span class="likes"><a @click="likePost(article)"><iv-icon
-                type="heart"></iv-icon>{{article.likeNum}} 喜欢</a> </span>
+              <span class="likes"><a @click="likePost(article)"><iv-icon type="heart"></iv-icon>{{article.likeNum}} 喜欢</a> </span>
             </p>
           </div>
         </iv-col>
-        <iv-col :xs="0" :sm="0" :md="imgSpan" :lg="imgSpan" :order="imgOrderType"
-                style="padding-left: 0px;padding-right: 0px">
+        <iv-col :xs="0" :sm="0" :md="imgSpan" :lg="imgSpan" :order="imgOrderType" style="padding-left: 0px;padding-right: 0px">
           <div class="img-wrapper" :class="themeClass">
             <img :src="article.cover" alt="">
           </div>
@@ -40,7 +35,6 @@
 
 <script type="text/ecmascript-6">
 import {mixin} from '@/utils'
-
 const ARTICLE_TYPE_BIG_IMAGE = 1
 const ARTICLE_TYPE_NO_IMAGE = 2
 
@@ -60,7 +54,7 @@ export default {
       return this.article.coverType === ARTICLE_TYPE_BIG_IMAGE ? 1 : 2
     },
     textSpan: function () {
-      if (this.aticle.coverType === ARTICLE_TYPE_BIG_IMAGE) {
+      if (this.article.coverType === ARTICLE_TYPE_BIG_IMAGE) {
         return 24
       } else if (this.article.coverType === ARTICLE_TYPE_NO_IMAGE) {
         return 24
@@ -88,7 +82,7 @@ export default {
   methods: {
     likePost (post) {
       this.$http({
-        url: this.$http.adorenUrl('/article/like/' + post.id),
+        url: this.$http.adornUrl('/article/like/' + post.id),
         method: 'put',
         data: this.$http.adornData()
       }).then(({data}) => {

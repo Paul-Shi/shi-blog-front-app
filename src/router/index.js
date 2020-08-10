@@ -160,7 +160,7 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach((to, from, next) => {
-  LoadingBar.finsh()
+  LoadingBar.finish()
   window.scrollTo(0, 0)
 })
 

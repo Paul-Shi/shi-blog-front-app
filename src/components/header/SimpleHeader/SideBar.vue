@@ -96,7 +96,7 @@ export default {
     bookCategoryList: Array
   },
   mixins: [mixin],
-  beforeUpdate (to, from, next) {
+  beforeRouteUpdate (to, from, next) {
     next()
   },
   methods: {

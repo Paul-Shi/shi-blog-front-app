@@ -29,7 +29,7 @@ export default {
     categorys: Array,
     defaultCategory: '',
     mainTitle: '',
-    subtitle: ''
+    subTitle: ''
   },
   methods: {
     filterByMenu (params) {
